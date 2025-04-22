@@ -2,25 +2,13 @@ package edu.wm.cs.cs301.sudoku.view;
 
 import edu.wm.cs.cs301.sudoku.model.SudokuPuzzle;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.ActionMap;
-import javax.swing.BorderFactory;
-import javax.swing.InputMap;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 
 /**
  * This class assembles and displays the window holding the sudoku puzzle
@@ -34,7 +22,7 @@ public class SudokuFrame {
 
     public SudokuFrame(SudokuPuzzle model) {
         this.model = model;
-        this.width = 1000;
+        this.width = 800;
         this.sudokuGridPanel = new SudokuGridPanel(this, model, width);
         this.frame = createAndShowGUI();
 
@@ -53,6 +41,7 @@ public class SudokuFrame {
 
         frame.add(createMenu(), BorderLayout.NORTH);
         frame.add(sudokuGridPanel, BorderLayout.CENTER);
+        frame.add(createNumberGrid(), BorderLayout.EAST);
 
         frame.pack();
         frame.setMinimumSize(frame.getPreferredSize());
@@ -62,6 +51,20 @@ public class SudokuFrame {
         System.out.println("Frame size: " + frame.getSize());
 
         return frame;
+    }
+
+    private JPanel createNumberGrid(){
+        JPanel numberGridPanel = new JPanel();
+
+        numberGridPanel.setLayout(new GridLayout(3,3));
+
+        for (int i = 1; i <= 9; i++) {
+            numberGridPanel.add(new JButton("" + i));
+        }
+
+        numberGridPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 20));
+
+        return numberGridPanel;
     }
 
     private JMenuBar createMenu(){
