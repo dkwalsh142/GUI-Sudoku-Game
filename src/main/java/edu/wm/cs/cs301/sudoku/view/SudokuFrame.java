@@ -54,14 +54,16 @@ public class SudokuFrame {
     private JMenuBar createMenu(){
         JMenuBar menuBar = new JMenuBar();
 
-        JMenu restartMenu = new JMenu("Restart");
-        menuBar.add(restartMenu);
+        JMenuItem restartItem = new JMenuItem("Restart");
+        menuBar.add(restartItem);
 
-        JMenu instructionsMenu = new JMenu("Instructions");
-        menuBar.add(instructionsMenu);
+        JMenuItem instructionsItem = new JMenuItem("Instructions");
+        instructionsItem.addActionListener(event-> new InstructionsFrame());
+        menuBar.add(instructionsItem);
 
-        JMenu quitMenu = new JMenu("Quit");
-        menuBar.add(quitMenu);
+        JMenuItem quitItem = new JMenuItem("Quit");
+        quitItem.addActionListener(event-> shutdown());
+        menuBar.add(quitItem);
 
 
         return menuBar;
