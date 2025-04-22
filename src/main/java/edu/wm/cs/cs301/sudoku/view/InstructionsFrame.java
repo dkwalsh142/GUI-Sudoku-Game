@@ -71,7 +71,7 @@ public class InstructionsFrame {
   <body style='font-family: sans-serif;'>
     <h2>How to Play Sudoku</h2>
     <p>
-      Sudoku is a logic-based number puzzle played on a 9x9 grid, divided into nine 3x3 subgrids.
+      Sudoku is a logic-based number puzzle played on a 9x9 grid, divided into nine 3x3 subgrids. <br>
       The goal is to fill each cell with a digit from <strong>1 to 9</strong>, following these rules:
     </p>
     <ul>
