@@ -39,6 +39,8 @@ public class SudokuFrame {
             }
         });
 
+        frame.add(createMenu(), BorderLayout.NORTH);
+
         frame.pack();
         frame.setMinimumSize(frame.getPreferredSize());
         frame.setLocationByPlatform(true);
@@ -47,6 +49,33 @@ public class SudokuFrame {
         System.out.println("Frame size: " + frame.getSize());
 
         return frame;
+    }
+
+    private JMenuBar createMenu(){
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu restartMenu = new JMenu("Restart");
+        menuBar.add(restartMenu);
+
+        JMenu instructionsMenu = new JMenu("Instructions");
+        menuBar.add(instructionsMenu);
+
+        JMenu quitMenu = new JMenu("Quit");
+        menuBar.add(quitMenu);
+
+
+        return menuBar;
+    }
+
+    private class CancelAction extends AbstractAction {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            shutdown();
+        }
+
     }
 
     private void shutdown() {
