@@ -3,6 +3,11 @@ package edu.wm.cs.cs301.sudoku.model;
 import java.util.Scanner;
 import java.util.*;
 
+/**
+ * This class creates the sudoku puzzle as a 9x9 array
+ * It gets the current state and checks legality of moves and win condition
+ */
+
 public class SudokuPuzzle {
     public static final int NUM_ROWS = 9;
     public static final int NUM_COLS = 9;

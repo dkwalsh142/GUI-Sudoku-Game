@@ -20,6 +20,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+/**
+ * This class assembles and displays the window holding the sudoku puzzle
+ */
 
 public class SudokuFrame {
     private final JFrame frame;

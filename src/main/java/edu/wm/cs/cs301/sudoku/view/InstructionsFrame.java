@@ -20,6 +20,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+/**
+ * This class creates and displays the instuctions page.
+ */
 
 public class InstructionsFrame {
     private final JFrame frame;
