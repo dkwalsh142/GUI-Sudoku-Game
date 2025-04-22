@@ -39,6 +39,7 @@ public class InstructionsFrame {
             }
         });
 
+        frame.add(createMainPanel(), BorderLayout.NORTH);
 
         frame.pack();
         frame.setMinimumSize(frame.getPreferredSize());
@@ -50,8 +51,38 @@ public class InstructionsFrame {
         return frame;
     }
 
+    private JPanel createMainPanel() {
+        JPanel panel = new JPanel();
+        JLabel instructions = new JLabel(instructionsHTML);
+        panel.add(instructions);
+
+        return panel;
+    }
+
     private void shutdown(WindowEvent event) {
         event.getWindow().dispose();
     }
+
+    String instructionsHTML = """
+<html>
+  <body style='font-family: sans-serif;'>
+    <h2>How to Play Sudoku</h2>
+    <p>
+      Sudoku is a logic-based number puzzle played on a 9x9 grid, divided into nine 3x3 subgrids.
+      The goal is to fill each cell with a digit from <strong>1 to 9</strong>, following these rules:
+    </p>
+    <ul>
+      <li>Each row must contain every digit from 1 to 9 exactly once.</li>
+      <li>Each column must also contain every digit from 1 to 9.</li>
+      <li>Each 3x3 box must contain every digit from 1 to 9.</li>
+    </ul>
+    <p>
+      Use logic and deduction to determine the correct placement of each number. 
+      No guessing required!
+    </p>
+    <p><em>Tip:</em> Start with rows, columns, or boxes that are nearly full.</p>
+  </body>
+</html>
+""";
 }
 

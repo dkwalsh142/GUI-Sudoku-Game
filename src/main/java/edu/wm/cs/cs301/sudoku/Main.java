@@ -37,7 +37,7 @@ public class Main implements Runnable {
 
     @Override
     public void run() {
-        new InstructionsFrame();
         new SudokuFrame();
+        new InstructionsFrame();
     }
 }
