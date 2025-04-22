@@ -30,7 +30,7 @@ public class SudokuGridPanel extends JPanel {
         this.model = model;
         this.topMargin = 0;
         this.letterWidth = 64;
-        this.insets = new Insets(0, 6, 6, 6);
+        this.insets = new Insets(0, 0, 0, 0);
 
         int wordWidth = (letterWidth + insets.right) * 9;
         this.leftMargin = (width - wordWidth) / 2;
