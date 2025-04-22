@@ -2,7 +2,7 @@ package edu.wm.cs.cs301.sudoku;
 
 import javax.swing.*;
 //import edu.wm.cs.cs301.sudoku.controller.;
-//import edu.wm.cs.cs301.sudoku.model.;
+import edu.wm.cs.cs301.sudoku.model.SudokuPuzzle;
 import edu.wm.cs.cs301.sudoku.view.SudokuFrame;
 import edu.wm.cs.cs301.sudoku.view.InstructionsFrame;
 
@@ -37,7 +37,7 @@ public class Main implements Runnable {
 
     @Override
     public void run() {
-        new SudokuFrame();
+        new SudokuFrame(new SudokuPuzzle());
         new InstructionsFrame();
     }
 }

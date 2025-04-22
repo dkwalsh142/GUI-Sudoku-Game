@@ -1,5 +1,7 @@
 package edu.wm.cs.cs301.sudoku.view;
 
+import edu.wm.cs.cs301.sudoku.model.SudokuPuzzle;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -26,9 +28,16 @@ import javax.swing.KeyStroke;
 
 public class SudokuFrame {
     private final JFrame frame;
+    private final SudokuPuzzle model;
+    private final SudokuGridPanel sudokuGridPanel;
+    private int width;
 
-    public SudokuFrame() {
+    public SudokuFrame(SudokuPuzzle model) {
+        this.model = model;
+        this.width = 1000;
+        this.sudokuGridPanel = new SudokuGridPanel(this, model, width);
         this.frame = createAndShowGUI();
+
     }
 
     private JFrame createAndShowGUI() {
@@ -43,6 +52,7 @@ public class SudokuFrame {
         });
 
         frame.add(createMenu(), BorderLayout.NORTH);
+        frame.add(sudokuGridPanel, BorderLayout.CENTER);
 
         frame.pack();
         frame.setMinimumSize(frame.getPreferredSize());
