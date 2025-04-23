@@ -62,7 +62,7 @@ public class SudokuFrame {
             numberGridPanel.add(new JButton("" + i));
         }
 
-        numberGridPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 20));
+        numberGridPanel.setBorder(BorderFactory.createEmptyBorder(200, 0, 200, 20));
 
         return numberGridPanel;
     }
@@ -101,5 +101,9 @@ public class SudokuFrame {
 
     private void shutdown() {
         System.exit(0);
+    }
+
+    private void close(WindowEvent event) {
+        event.getWindow().dispose();
     }
 }

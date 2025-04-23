@@ -70,18 +70,16 @@ public class SudokuGridPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        Font titleFont = AppFonts.getTitleFont();
+
         int[][] sudokuGrid = model.getCurrent();
         for (int row = 0; row < grid.length; row++) {
             for (int column = 0; column < grid[row].length; column++) {
                 Rectangle r = grid[row][column];
                 int sudokuResponse = sudokuGrid[row][column];
                 drawOutline(g2d, r);
-                //drawSudokuResponse(g2d, sudokuResponse, r, titleFont);
             }
-
-
         }
+        sendNumbers(g2d, model, grid);
     }
 
     private void drawOutline(Graphics2D g2d, Rectangle r) {
@@ -109,6 +107,25 @@ public class SudokuGridPanel extends JPanel {
         }
     }*/
 
+    private void sendNumbers(Graphics2D g2d, SudokuPuzzle model, Rectangle[][] grid){
+        int i = 0;
+        int x = 0;
+        int[][] puzzle = model.getCurrent();
+        Font titleFont = AppFonts.getTitleFont();
+
+        while(i<9){
+            x = 0;
+            while (x<9){
+                String str;
+                str = String.valueOf(puzzle[i][x]);
+                Rectangle r = grid[i][x];
+                drawCenteredString(g2d, str, r, titleFont);
+                x++;
+            }
+            i++;
+        }
+    }
+
     /**
      * Draw a String centered in the middle of a Rectangle.
      *
@@ -116,8 +133,9 @@ public class SudokuGridPanel extends JPanel {
      * @param text The String to draw.
      * @param rect The Rectangle to center the text in.
      */
-    private void drawCenteredString(Graphics2D g2d, String text, Rectangle rect,
-                                    Font font) {
+
+
+    private void drawCenteredString(Graphics2D g2d, String text, Rectangle rect, Font font) {
         FontMetrics metrics = g2d.getFontMetrics(font);
         int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
         int y = rect.y + ((rect.height - metrics.getHeight()) / 2)
