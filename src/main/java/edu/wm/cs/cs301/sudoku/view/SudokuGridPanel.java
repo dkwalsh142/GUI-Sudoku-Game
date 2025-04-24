@@ -3,15 +3,7 @@ package edu.wm.cs.cs301.sudoku.view;
 import edu.wm.cs.cs301.sudoku.model.AppColors;
 import edu.wm.cs.cs301.sudoku.model.SudokuPuzzle;
 
-import java.awt.BasicStroke;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import java.awt.*;
 
 import javax.swing.JPanel;
 public class SudokuGridPanel extends JPanel {
@@ -20,22 +12,18 @@ public class SudokuGridPanel extends JPanel {
 
     private final int topMargin, leftMargin, letterWidth;
 
-    private final Insets insets;
-
     private final Rectangle[][] grid;
 
     private final SudokuPuzzle model;
 
     public SudokuGridPanel(SudokuFrame view, SudokuPuzzle model, int width) {
         this.model = model;
-        this.topMargin = 0;
+        this.topMargin = 20;
         this.letterWidth = 64;
-        this.insets = new Insets(0, 0, 0, 0);
 
-        int wordWidth = (letterWidth + insets.right) * 9;
+        int wordWidth = (letterWidth) * 9;
         this.leftMargin = (width - wordWidth) / 2;
-        int height = (letterWidth + insets.bottom) * 9
-                + 2 * topMargin;
+        int height = (letterWidth) * 9 + 2 * topMargin;
         this.setPreferredSize(new Dimension(width, height));
 
         this.grid = calculateRectangles();
@@ -51,10 +39,10 @@ public class SudokuGridPanel extends JPanel {
             for (int column = 0; column < 9; column++) {
                 grid[row][column] = new Rectangle(x, y, letterWidth,
                         letterWidth);
-                x += letterWidth + insets.right;
+                x += letterWidth;
             }
             x = leftMargin;
-            y += letterWidth + insets.bottom;
+            y += letterWidth;
         }
 
         return grid;
@@ -144,6 +132,7 @@ public class SudokuGridPanel extends JPanel {
                 + metrics.getAscent();
 
         g2d.setFont(font);
+        g2d.setColor(Color.BLACK);
         g2d.drawString(text, x, y);
     }
 }
