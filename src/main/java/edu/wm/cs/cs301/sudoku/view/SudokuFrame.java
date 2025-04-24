@@ -2,6 +2,7 @@ package edu.wm.cs.cs301.sudoku.view;
 
 import edu.wm.cs.cs301.sudoku.model.AppColors;
 import edu.wm.cs.cs301.sudoku.model.SudokuPuzzle;
+import edu.wm.cs.cs301.sudoku.controller.InsertNumber;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,7 +43,7 @@ public class SudokuFrame {
 
         frame.add(createMenu(), BorderLayout.NORTH);
         frame.add(sudokuGridPanel, BorderLayout.CENTER);
-        frame.add(createNumberGrid(), BorderLayout.EAST);
+        frame.add(createNumberGrid(sudokuGridPanel), BorderLayout.EAST);
         //frame.add(createDeleteButton(), BorderLayout.EAST);
 
         frame.pack();
@@ -55,7 +56,7 @@ public class SudokuFrame {
         return frame;
     }
 
-    private JPanel createNumberGrid(){
+    private JPanel createNumberGrid(SudokuGridPanel panel){
         JPanel numberGridPanel = new JPanel();
 
         numberGridPanel.setLayout(new GridLayout(3,3,5,5));
@@ -67,6 +68,14 @@ public class SudokuFrame {
             button.setBackground(Color.LIGHT_GRAY);
             button.setFont(titleFont);
             button.setOpaque(true);
+
+            button.addActionListener(event ->
+                {InsertNumber inserter = new InsertNumber();
+                int row = 0;
+                int col = 0;
+                int value = 5;
+                Rectangle cell = panel.getGridCell(row,col);
+                inserter.insertNumber(cell, row, col, model, value, panel);});
 
             numberGridPanel.add(button);
         }

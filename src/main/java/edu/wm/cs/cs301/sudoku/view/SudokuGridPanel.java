@@ -29,6 +29,7 @@ public class SudokuGridPanel extends JPanel {
         this.grid = calculateRectangles();
     }
 
+
     private Rectangle[][] calculateRectangles() {
         Rectangle[][] grid = new Rectangle[9][9];
 
@@ -48,6 +49,10 @@ public class SudokuGridPanel extends JPanel {
         return grid;
     }
 
+    public Rectangle getGridCell(int row, int col) {
+        return grid[0][0];
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -60,6 +65,7 @@ public class SudokuGridPanel extends JPanel {
 
 
         int[][] sudokuGrid = model.getCurrent();
+
         for (int row = 0; row < grid.length; row++) {
             for (int column = 0; column < grid[row].length; column++) {
                 Rectangle r = grid[row][column];
@@ -83,17 +89,9 @@ public class SudokuGridPanel extends JPanel {
         g2d.drawLine(x + width, y, x + width, y + height);
     }
 
-
-    /**private void drawSudokuResponse(Graphics2D g2d,
-                                    int wordleResponse, Rectangle r, Font titleFont) {
-        if (wordleResponse != null) {
-            g2d.setColor(wordleResponse.getBackgroundColor());
-            g2d.fillRect(r.x, r.y, r.width, r.height);
-            g2d.setColor(wordleResponse.getForegroundColor());
-            drawCenteredString(g2d,
-                    Character.toString(wordleResponse.getChar()), r, titleFont);
-        }
-    }*/
+    public void updateGrid(){
+        repaint();
+    }
 
     private void sendNumbers(Graphics2D g2d, SudokuPuzzle model, Rectangle[][] grid){
         int i = 0;
@@ -123,7 +121,6 @@ public class SudokuGridPanel extends JPanel {
      * @param text The String to draw.
      * @param rect The Rectangle to center the text in.
      */
-
 
     private void drawCenteredString(Graphics2D g2d, String text, Rectangle rect, Font font) {
         FontMetrics metrics = g2d.getFontMetrics(font);
