@@ -119,7 +119,9 @@ public class SudokuGridPanel extends JPanel {
                 String str;
                 str = String.valueOf(puzzle[i][x]);
                 Rectangle r = grid[i][x];
-                drawCenteredString(g2d, str, r, titleFont);
+                if (puzzle[i][x]!=0){
+                    drawCenteredString(g2d, str, r, titleFont);
+                }
                 x++;
             }
             i++;
