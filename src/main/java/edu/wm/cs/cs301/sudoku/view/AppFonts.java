@@ -9,7 +9,7 @@ public class AppFonts {
     }
 
     public static Font getTextFont() {
-        return new Font("Dialog", Font.PLAIN, 16);
+        return new Font("Dialog", Font.BOLD, 24);
     }
 
     public static Font getFooterFont() {

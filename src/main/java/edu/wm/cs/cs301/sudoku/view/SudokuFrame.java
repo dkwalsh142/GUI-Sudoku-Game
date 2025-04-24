@@ -1,5 +1,6 @@
 package edu.wm.cs.cs301.sudoku.view;
 
+import edu.wm.cs.cs301.sudoku.model.AppColors;
 import edu.wm.cs.cs301.sudoku.model.SudokuPuzzle;
 
 import java.awt.*;
@@ -42,6 +43,7 @@ public class SudokuFrame {
         frame.add(createMenu(), BorderLayout.NORTH);
         frame.add(sudokuGridPanel, BorderLayout.CENTER);
         frame.add(createNumberGrid(), BorderLayout.EAST);
+        //frame.add(createDeleteButton(), BorderLayout.EAST);
 
         frame.pack();
         frame.setMinimumSize(frame.getPreferredSize());
@@ -56,10 +58,17 @@ public class SudokuFrame {
     private JPanel createNumberGrid(){
         JPanel numberGridPanel = new JPanel();
 
-        numberGridPanel.setLayout(new GridLayout(3,3));
+        numberGridPanel.setLayout(new GridLayout(3,3,5,5));
+        Font titleFont = AppFonts.getTextFont();
 
         for (int i = 1; i <= 9; i++) {
-            numberGridPanel.add(new JButton("" + i));
+            JButton button = new JButton("" + i);
+            button.setForeground(Color.BLACK);
+            button.setBackground(Color.LIGHT_GRAY);
+            button.setFont(titleFont);
+            button.setOpaque(true);
+
+            numberGridPanel.add(button);
         }
 
         numberGridPanel.setBorder(BorderFactory.createEmptyBorder(200, 0, 200, 20));
@@ -67,10 +76,18 @@ public class SudokuFrame {
         return numberGridPanel;
     }
 
+    private JPanel createDeleteButton(){
+        JPanel deletePanel = new JPanel();
+        JButton deleteButton = new JButton("Delete");
+        deletePanel.add(deleteButton);
+
+        return deletePanel;
+    }
+
     private JMenuBar createMenu(){
         JMenuBar menuBar = new JMenuBar();
 
-        JMenu gameMenu = new JMenu("Game");
+        JMenu gameMenu = new JMenu("Options");
 
         JMenuItem restartItem = new JMenuItem("Restart");
         gameMenu.add(restartItem);
