@@ -48,7 +48,7 @@ public class SudokuFrame {
 
         frame.pack();
         frame.setMinimumSize(frame.getPreferredSize());
-        frame.setLocationByPlatform(true);
+        frame.setLocation(300, 150);
         frame.setVisible(true);
 
         System.out.println("Frame size: " + frame.getSize());
@@ -76,7 +76,7 @@ public class SudokuFrame {
                 int col = panel.getSelectedCol();
                 int value = finalI;
                 Rectangle cell = panel.getGridCell(row,col);
-                inserter.insertNumber(cell, row, col, model, value, panel);});
+                inserter.insertNumber(cell, row, col, model, value, panel, this);});
 
             numberGridPanel.add(button);
         }
@@ -100,6 +100,7 @@ public class SudokuFrame {
         JMenu gameMenu = new JMenu("Options");
 
         JMenuItem restartItem = new JMenuItem("Restart");
+        restartItem.addActionListener(event -> restartGame());
         gameMenu.add(restartItem);
 
         JMenuItem instructionsItem = new JMenuItem("Instructions");
@@ -115,15 +116,11 @@ public class SudokuFrame {
         return menuBar;
     }
 
-    private class CancelAction extends AbstractAction {
+    public void restartGame() {
+        frame.dispose();
 
-        private static final long serialVersionUID = 1L;
-
-        @Override
-        public void actionPerformed(ActionEvent event) {
-            shutdown();
-        }
-
+        SudokuPuzzle newModel = new SudokuPuzzle();
+        new SudokuFrame(newModel);
     }
 
     private void shutdown() {
@@ -133,4 +130,14 @@ public class SudokuFrame {
     private void close(WindowEvent event) {
         event.getWindow().dispose();
     }
+
+    public void victory(){
+        new Victory(this);
+    }
+
+    public void dispose(){
+        frame.dispose();
+    }
+
+
 }

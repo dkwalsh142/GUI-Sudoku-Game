@@ -93,10 +93,6 @@ public class SudokuGridPanel extends JPanel {
         return selectedCol;
     }
 
-    public void victory(){
-        new Victory();
-    }
-
 
     @Override
     protected void paintComponent(Graphics g) {

@@ -1,10 +1,8 @@
 package edu.wm.cs.cs301.sudoku.view;
 
+import edu.wm.cs.cs301.sudoku.model.SudokuPuzzle;
+
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -12,8 +10,10 @@ import javax.swing.*;
 
 public class Victory {
     private final JFrame frame;
+    private final SudokuFrame gameFrame;
 
-    public Victory() {
+    public Victory(SudokuFrame panel) {
+        this.gameFrame = panel;
         this.frame = createAndShowGUI();
     }
 
@@ -50,6 +50,7 @@ public class Victory {
     private JPanel createButtonsPanel(){
         JPanel buttonsPanel = new JPanel();
         JButton playAgain = new JButton("Play Again");
+        playAgain.addActionListener(event -> restartGame());
 
         JButton quit = new JButton("Quit");
         quit.addActionListener(event -> shutdownFull());
@@ -66,6 +67,15 @@ public class Victory {
 
     private void shutdownFull() {
         System.exit(0);
+    }
+
+    private void restartGame() {
+        gameFrame.dispose();
+        frame.dispose();
+
+        SudokuPuzzle newModel = new SudokuPuzzle();
+        new SudokuFrame(newModel);
+
     }
 
     String victoryTextHTML = """
