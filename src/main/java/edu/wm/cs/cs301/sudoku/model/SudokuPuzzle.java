@@ -113,7 +113,7 @@ public class SudokuPuzzle {
 
     public int[][] removeValues (int[][] grid){
         int[][] tempGrid = grid;
-        int attempts = 33;
+        int attempts = 90;
         for (int num = 1; num <= attempts; num++) {
             int row = (int) (Math.random() * 9);
             int col = (int) (Math.random() * 9);
@@ -203,13 +203,16 @@ public class SudokuPuzzle {
         if (row == 10){
             return false; // deals with bad inputs passed on from parse move
         }
-        if (setup[row][col] != 0){ //checks if cell was part of orig puzzle
+        else if (setup[row][col] != 0){ //checks if cell was part of orig puzzle
             return false;
         }
-        if (!checkCell(current, row, col, value)){ //checks if move is sudoku legal
+        else if (value == 0){
+            return true;
+        }
+        else if (!checkCell(current, row, col, value)){ //checks if move is sudoku legal
             return false;
         }
-        return true;
+        else return true;
     }
 
     /**

@@ -58,8 +58,10 @@ public class SudokuFrame {
     }
 
     private JPanel createNumberGrid(SudokuGridPanel panel){
-        JPanel numberGridPanel = new JPanel();
+        JPanel wrapperPanel = new JPanel();
+        wrapperPanel.setLayout(new BoxLayout(wrapperPanel, BoxLayout.Y_AXIS));
 
+        JPanel numberGridPanel = new JPanel();
         numberGridPanel.setLayout(new GridLayout(3,3,5,5));
         Font titleFont = AppFonts.getTextFont();
 
@@ -82,18 +84,32 @@ public class SudokuFrame {
             numberGridPanel.add(button);
         }
 
-        numberGridPanel.setBorder(BorderFactory.createEmptyBorder(210, 0, 210, 20));
-
-        return numberGridPanel;
-    }
-
-    private JPanel createDeleteButton(){
-        JPanel deletePanel = new JPanel();
         JButton deleteButton = new JButton("Delete");
-        deletePanel.add(deleteButton);
+        deleteButton.setForeground(Color.BLACK);
+        deleteButton.setBackground(Color.LIGHT_GRAY);
+        deleteButton.setFont(titleFont);
+        deleteButton.setOpaque(true);
 
-        return deletePanel;
+        deleteButton.addActionListener(event ->
+        {InsertNumber inserter = new InsertNumber();
+            int row = panel.getSelectedRow();
+            int col = panel.getSelectedCol();
+            int value = 0;
+            Rectangle cell = panel.getGridCell(row,col);
+            inserter.insertNumber(cell, row, col, model, value, panel, this);});
+
+
+        wrapperPanel.add(Box.createVerticalStrut(20)); // top spacing
+        wrapperPanel.add(numberGridPanel);
+        wrapperPanel.add(Box.createVerticalStrut(10)); // space between grid and delete
+        wrapperPanel.add(deleteButton);
+        wrapperPanel.add(Box.createVerticalGlue());
+
+        wrapperPanel.setBorder(BorderFactory.createEmptyBorder(50, 10, 50, 10));
+
+        return wrapperPanel;
     }
+
 
     private JMenuBar createMenu(){
         JMenuBar menuBar = new JMenuBar();
