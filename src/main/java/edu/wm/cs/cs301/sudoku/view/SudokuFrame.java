@@ -69,11 +69,12 @@ public class SudokuFrame {
             button.setFont(titleFont);
             button.setOpaque(true);
 
+            int finalI = i;
             button.addActionListener(event ->
                 {InsertNumber inserter = new InsertNumber();
-                int row = 0;
-                int col = 0;
-                int value = 5;
+                int row = panel.getSelectedRow();
+                int col = panel.getSelectedCol();
+                int value = finalI;
                 Rectangle cell = panel.getGridCell(row,col);
                 inserter.insertNumber(cell, row, col, model, value, panel);});
 

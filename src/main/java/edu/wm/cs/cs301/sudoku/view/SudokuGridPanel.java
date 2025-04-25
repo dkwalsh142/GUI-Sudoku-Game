@@ -4,8 +4,13 @@ import edu.wm.cs.cs301.sudoku.model.AppColors;
 import edu.wm.cs.cs301.sudoku.model.SudokuPuzzle;
 
 import java.awt.*;
-
 import javax.swing.JPanel;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
 public class SudokuGridPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
@@ -15,6 +20,10 @@ public class SudokuGridPanel extends JPanel {
     private final Rectangle[][] grid;
 
     private final SudokuPuzzle model;
+
+    private int selectedRow = -1;
+
+    private int selectedCol = -1;
 
     public SudokuGridPanel(SudokuFrame view, SudokuPuzzle model, int width) {
         this.model = model;
@@ -27,7 +36,30 @@ public class SudokuGridPanel extends JPanel {
         this.setPreferredSize(new Dimension(width, height));
 
         this.grid = calculateRectangles();
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Point clickPoint = e.getPoint();
+                handleCellClick(clickPoint);
+            }
+        });
+
     }
+
+    private void handleCellClick(Point p){
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[row].length; col++) {
+                if (grid[row][col].contains(p)) {
+                    selectedRow = row;
+                    selectedCol = col;
+                    System.out.println("Clicked cell: " + row + ", " + col);
+                    repaint(); // optional: use to highlight the cell
+                    return;
+                }
+            }
+        }
+    }
+
 
 
     private Rectangle[][] calculateRectangles() {
@@ -50,8 +82,17 @@ public class SudokuGridPanel extends JPanel {
     }
 
     public Rectangle getGridCell(int row, int col) {
-        return grid[0][0];
+        return grid[selectedRow][selectedCol];
     }
+
+    public int getSelectedRow() {
+        return selectedRow;
+    }
+
+    public int getSelectedCol() {
+        return selectedCol;
+    }
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -114,13 +155,7 @@ public class SudokuGridPanel extends JPanel {
         }
     }
 
-    /**
-     * Draw a String centered in the middle of a Rectangle.
-     *
-     * @param g2d  The Graphics instance.
-     * @param text The String to draw.
-     * @param rect The Rectangle to center the text in.
-     */
+
 
     private void drawCenteredString(Graphics2D g2d, String text, Rectangle rect, Font font) {
         FontMetrics metrics = g2d.getFontMetrics(font);
