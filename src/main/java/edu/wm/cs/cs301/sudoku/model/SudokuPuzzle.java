@@ -86,7 +86,7 @@ public class SudokuPuzzle {
 
     public int[][] removeValues (int[][] grid){
         int[][] tempGrid = grid;
-        int attempts = 90;
+        int attempts = 1;
         for (int num = 1; num <= attempts; num++) {
             int row = (int) (Math.random() * 9);
             int col = (int) (Math.random() * 9);

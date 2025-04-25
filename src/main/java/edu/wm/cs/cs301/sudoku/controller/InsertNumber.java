@@ -10,6 +10,9 @@ public class InsertNumber {
         if(model.checkMoveLegal(row, column, value)){
             model.updatePuzzle(row, column, value);
             panel.updateGrid();
+            if(model.checkGrid(model.getCurrent())){
+                panel.victory();
+            }
         }
     }
 }
