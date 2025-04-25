@@ -63,6 +63,7 @@ public class SudokuFrame {
 
         JPanel numberGridPanel = new JPanel();
         numberGridPanel.setLayout(new GridLayout(3,3,5,5));
+        numberGridPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         Font titleFont = AppFonts.getTextFont();
 
         for (int i = 1; i <= 9; i++) {
@@ -90,6 +91,9 @@ public class SudokuFrame {
         deleteButton.setFont(titleFont);
         deleteButton.setOpaque(true);
 
+        deleteButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        deleteButton.setMaximumSize(new Dimension(Short.MAX_VALUE, deleteButton.getPreferredSize().height));
+
         deleteButton.addActionListener(event ->
         {InsertNumber inserter = new InsertNumber();
             int row = panel.getSelectedRow();
@@ -99,13 +103,13 @@ public class SudokuFrame {
             inserter.insertNumber(cell, row, col, model, value, panel, this);});
 
 
-        wrapperPanel.add(Box.createVerticalStrut(20)); // top spacing
+        wrapperPanel.add(Box.createVerticalStrut(200));
         wrapperPanel.add(numberGridPanel);
-        wrapperPanel.add(Box.createVerticalStrut(10)); // space between grid and delete
+        wrapperPanel.add(Box.createVerticalStrut(10));
         wrapperPanel.add(deleteButton);
         wrapperPanel.add(Box.createVerticalGlue());
 
-        wrapperPanel.setBorder(BorderFactory.createEmptyBorder(50, 10, 50, 10));
+        wrapperPanel.setBorder(BorderFactory.createEmptyBorder(25, 0, 125, 30));
 
         return wrapperPanel;
     }
