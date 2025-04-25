@@ -1,11 +1,12 @@
 package edu.wm.cs.cs301.sudoku.model;
 
-import java.util.Scanner;
+
 import java.util.*;
 
 /**
- * This class creates the sudoku puzzle as a 9x9 array
- * It gets the current state and checks legality of moves and win condition
+ * The {@code SudokuPuzzle} class represents the model component of a Sudoku game.
+ * It manages the puzzle's initial setup, current state, and solution, and provides
+ * methods for validation, and puzzle manipulation.
  */
 
 public class SudokuPuzzle {
@@ -42,6 +43,13 @@ public class SudokuPuzzle {
         return solution;
     }
 
+    /**
+     * Recursively fills a grid with a valid Sudoku solution using backtracking.
+     *
+     * @param grid the 9x9 integer grid to be filled
+     * @return {@code true} if a valid grid was successfully generated; {@code false} otherwise
+     */
+
     public boolean fillGrid(int[][] grid) {
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid[row].length; col++) {
@@ -63,6 +71,13 @@ public class SudokuPuzzle {
         }
         return true;
     }
+
+    /**
+     * Determines whether the given Sudoku grid has a unique solution.
+     *
+     * @param grid the 9x9 Sudoku grid to evaluate
+     * @return {@code true} if the grid has exactly one valid solution; {@code false} otherwise
+     */
 
     public boolean findSolutions(int[][] grid){
         int counter = 0;
@@ -88,6 +103,14 @@ public class SudokuPuzzle {
         return counter == 1;
     }
 
+    /**
+     * Randomly removes values from a completed Sudoku grid to generate a playable puzzle,
+     * ensuring that the resulting puzzle has a unique solution.
+     *
+     * @param grid a completed 9x9 Sudoku solution grid
+     * @return the modified grid with some values removed
+     */
+
     public int[][] removeValues (int[][] grid){
         int[][] tempGrid = grid;
         int attempts = 30;
@@ -103,6 +126,13 @@ public class SudokuPuzzle {
         }
         return tempGrid;
     }
+
+    /**
+     * Checks whether a given Sudoku grid is completely filled (i.e., contains no zeros).
+     *
+     * @param grid the Sudoku grid to check
+     * @return {@code true} if the grid is fully filled; {@code false} otherwise
+     */
 
     public boolean checkGrid(int[][] grid){
         for (int row = 0; row < grid.length; row++) {
@@ -149,37 +179,6 @@ public class SudokuPuzzle {
         return true;
     }
 
-    public void printGrid(int[][] grid) {
-        Object[][] printGrid = new Object[9][9];
-        for (int row = 0; row < grid.length; row++) {
-            for (int col = 0; col < grid[row].length; col++) {
-                if(grid[row][col] == 0){
-                    printGrid[row][col] = " ";
-                }
-                else{
-                    printGrid[row][col] = grid[row][col];
-                }
-            }
-        }
-
-        System.out.println(
-                "    A B C   D E F   G H I\n" +
-                        "  +-----------------------+\n" +
-                        "A | " + printGrid[0][0] + " " + printGrid[0][1] + " " + printGrid[0][2] + " " + "|" + " " + printGrid[0][3] + " " + printGrid[0][4] + " " + printGrid[0][5] + " " + "|" + " " + printGrid[0][6] + " " + printGrid[0][7] + " " + printGrid[0][8] + " " + "|\n" +
-                        "B | " + printGrid[1][0] + " " + printGrid[1][1] + " " + printGrid[1][2] + " " + "|" + " " + printGrid[1][3] + " " + printGrid[1][4] + " " + printGrid[1][5] + " " + "|" + " " + printGrid[1][6] + " " + printGrid[1][7] + " " + printGrid[1][8] + " " + "|\n" +
-                        "C | " + printGrid[2][0] + " " + printGrid[2][1] + " " + printGrid[2][2] + " " + "|" + " " + printGrid[2][3] + " " + printGrid[2][4] + " " + printGrid[2][5] + " " + "|" + " " + printGrid[2][6] + " " + printGrid[2][7] + " " + printGrid[2][8] + " " + "|\n" +
-                        "  +-------+-------+-------+\n" +
-                        "D | " + printGrid[3][0] + " " + printGrid[3][1] + " " + printGrid[3][2] + " " + "|" + " " + printGrid[3][3] + " " + printGrid[3][4] + " " + printGrid[3][5] + " " + "|" + " " + printGrid[3][6] + " " + printGrid[3][7] + " " + printGrid[3][8] + " " + "|\n" +
-                        "E | " + printGrid[4][0] + " " + printGrid[4][1] + " " + printGrid[4][2] + " " + "|" + " " + printGrid[4][3] + " " + printGrid[4][4] + " " + printGrid[4][5] + " " + "|" + " " + printGrid[4][6] + " " + printGrid[4][7] + " " + printGrid[4][8] + " " + "|\n" +
-                        "F | " + printGrid[5][0] + " " + printGrid[5][1] + " " + printGrid[5][2] + " " + "|" + " " + printGrid[5][3] + " " + printGrid[5][4] + " " + printGrid[5][5] + " " + "|" + " " + printGrid[5][6] + " " + printGrid[5][7] + " " + printGrid[5][8] + " " + "|\n" +
-                        "  +-------+-------+-------+\n" +
-                        "G | " + printGrid[6][0] + " " + printGrid[6][1] + " " + printGrid[6][2] + " " + "|" + " " + printGrid[6][3] + " " + printGrid[6][4] + " " + printGrid[6][5] + " " + "|" + " " + printGrid[6][6] + " " + printGrid[6][7] + " " + printGrid[6][8] + " " + "|\n" +
-                        "H | " + printGrid[7][0] + " " + printGrid[7][1] + " " + printGrid[7][2] + " " + "|" + " " + printGrid[7][3] + " " + printGrid[7][4] + " " + printGrid[7][5] + " " + "|" + " " + printGrid[7][6] + " " + printGrid[7][7] + " " + printGrid[7][8] + " " + "|\n" +
-                        "I | " + printGrid[8][0] + " " + printGrid[8][1] + " " + printGrid[8][2] + " " + "|" + " " + printGrid[8][3] + " " + printGrid[8][4] + " " + printGrid[8][5] + " " + "|" + " " + printGrid[8][6] + " " + printGrid[8][7] + " " + printGrid[8][8] + " " + "|\n" +
-                        "  +-------+-------+-------+"
-        );
-    }
-
     private int[][] copyGrid(int[][] grid){
         int[][] empty = new int[9][9];
         for (int row = 0; row < grid.length; row++) {
@@ -190,127 +189,15 @@ public class SudokuPuzzle {
         return empty;
     }
 
-    public String getMove(){
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
-    public int[] parseMove(String move){
-        // will return {0,0,0} if quit, {10,10,10} if invalid, and if valid {row, col, value}
-        move = move.trim();
-        int[] values = new int[3];
-        char firstLetter = move.charAt(0);
-        char secondLetter = move.charAt(1);
-        char number = move.charAt(2);
-
-        if (move.equals("Quit")) {
-            values = new int[]{100, 100, 100};
-            return values;
-        }
-
-        if (move.length() != 3){
-            values = new int[]{10, 10, 10};
-            return values;
-        }
-
-        switch (firstLetter){
-            case 'A':
-                values[0] = 0;
-                break;
-            case 'B':
-                values[0] = 1;
-                break;
-            case 'C':
-                values[0] = 2;
-                break;
-            case 'D':
-                values[0] = 3;
-                break;
-            case 'E':
-                values[0] = 4;
-                break;
-            case 'F':
-                values[0] = 5;
-                break;
-            case 'G':
-                values[0] = 6;
-                break;
-            case 'H':
-                values[0] = 7;
-                break;
-            case 'I':
-                values[0] = 8;
-                break;
-            default:
-                values = new int[]{10, 10, 10};
-                return values;
-        }
-        switch (secondLetter){
-            case 'A':
-                values[1] = 0;
-                break;
-            case 'B':
-                values[1] = 1;
-                break;
-            case 'C':
-                values[1] = 2;
-                break;
-            case 'D':
-                values[1] = 3;
-                break;
-            case 'E':
-                values[1] = 4;
-                break;
-            case 'F':
-                values[1] = 5;
-                break;
-            case 'G':
-                values[1] = 6;
-                break;
-            case 'H':
-                values[1] = 7;
-                break;
-            case 'I':
-                values[1] = 8;
-                break;
-            default:
-                values = new int[]{10, 10, 10};
-                return values;
-        }
-        switch (number){
-            case '1':
-                values[2] = 1;
-                break;
-            case '2':
-                values[2] = 2;
-                break;
-            case '3':
-                values[2] = 3;
-                break;
-            case '4':
-                values[2] = 4;
-                break;
-            case '5':
-                values[2] = 5;
-                break;
-            case '6':
-                values[2] = 6;
-                break;
-            case '7':
-                values[2] = 7;
-                break;
-            case '8':
-                values[2] = 8;
-                break;
-            case '9':
-                values[2] = 9;
-                break;
-            default:
-                values = new int[]{10, 10, 10};
-                break;
-        }
-        return values;
-    }
+    /**
+     * Validates whether a proposed move is legal, considering both the original puzzle constraints
+     * and Sudoku rules.
+     *
+     * @param row the row index of the cell
+     * @param col the column index of the cell
+     * @param value the value the player wants to insert
+     * @return {@code true} if the move is valid; {@code false} otherwise
+     */
 
     public boolean checkMoveLegal(int row, int col, int value){
         if (row == 10){
@@ -324,6 +211,14 @@ public class SudokuPuzzle {
         }
         return true;
     }
+
+    /**
+     * Updates the current puzzle grid by placing a value at the specified location.
+     *
+     * @param row the row index of the cell
+     * @param col the column index of the cell
+     * @param value the value to insert
+     */
 
     public void updatePuzzle(int row, int col, int value){
         current[row][col] = value;

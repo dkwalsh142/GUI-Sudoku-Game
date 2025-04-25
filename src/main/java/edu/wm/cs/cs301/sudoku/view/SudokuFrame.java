@@ -1,20 +1,21 @@
 package edu.wm.cs.cs301.sudoku.view;
 
-import edu.wm.cs.cs301.sudoku.model.AppColors;
 import edu.wm.cs.cs301.sudoku.model.SudokuPuzzle;
 import edu.wm.cs.cs301.sudoku.controller.InsertNumber;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
 /**
- * This class assembles and displays the window holding the sudoku puzzle
+ * The {@code SudokuFrame} class serves as the main GUI window for the Sudoku application.
+ * It assembles all core components including the puzzle grid, number input buttons,
+ * and menu bar. It also handles user interaction events such as restarting the game,
+ * quitting the application, and launching the instructions or victory screen.
  */
+
 
 public class SudokuFrame {
     private final JFrame frame;
@@ -116,6 +117,10 @@ public class SudokuFrame {
         return menuBar;
     }
 
+    /**
+     * Restarts the game by disposing of the current game window and launching a new instance
+     * of {@code SudokuFrame} with a fresh {@code SudokuPuzzle}.
+     */
     public void restartGame() {
         frame.dispose();
 
@@ -131,10 +136,16 @@ public class SudokuFrame {
         event.getWindow().dispose();
     }
 
+    /**
+     * Triggers the display of the victory screen by launching a new {@code Victory} window.
+     */
     public void victory(){
         new Victory(this);
     }
 
+    /**
+     * Disposes of the main game frame, effectively closing the window without exiting the program.
+     */
     public void dispose(){
         frame.dispose();
     }

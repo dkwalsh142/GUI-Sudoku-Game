@@ -1,27 +1,15 @@
 package edu.wm.cs.cs301.sudoku.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import javax.swing.AbstractAction;
-import javax.swing.ActionMap;
-import javax.swing.BorderFactory;
-import javax.swing.InputMap;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 
 /**
- * This class creates and displays the instuctions page.
+ * The {@code InstructionsFrame} class creates and displays a window containing
+ * gameplay instructions for the Sudoku application.
  */
 
 public class InstructionsFrame {
@@ -30,6 +18,13 @@ public class InstructionsFrame {
     public InstructionsFrame() {
         this.frame = createAndShowGUI();
     }
+
+    /**
+     * Constructs and initializes the instructions window, including its content and
+     * layout configuration. Sets up shutdown behavior and returns the created frame.
+     *
+     * @return the initialized {@code JFrame} containing the instructions content
+     */
 
     private JFrame createAndShowGUI() {
         JFrame frame = new JFrame("Instructions");

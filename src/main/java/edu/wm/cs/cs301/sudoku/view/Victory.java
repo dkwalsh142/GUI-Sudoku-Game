@@ -8,6 +8,12 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
+/**
+ * The {@code Victory} class creates and displays a pop-up window when the user
+ * successfully completes the Sudoku puzzle. It provides congratulatory text along
+ * with buttons to either start a new game or quit the application.
+ */
+
 public class Victory {
     private final JFrame frame;
     private final SudokuFrame gameFrame;
@@ -17,6 +23,12 @@ public class Victory {
         this.frame = createAndShowGUI();
     }
 
+    /**
+     * Initializes the victory window by setting up its layout, behavior, and content.
+     * Configures the frame to prevent default closing and attaches a shutdown listener.
+     *
+     * @return the initialized {@code JFrame} representing the victory screen
+     */
     private JFrame createAndShowGUI() {
         JFrame frame = new JFrame("VICTORY!");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -39,6 +51,11 @@ public class Victory {
         return frame;
     }
 
+    /**
+     * Creates the main panel containing the victory message in styled HTML format.
+     *
+     * @return a {@code JPanel} containing the congratulatory text
+     */
     private JPanel createMainPanel() {
         JPanel panel = new JPanel();
         JLabel victoryText = new JLabel(victoryTextHTML);
@@ -47,6 +64,12 @@ public class Victory {
         return panel;
     }
 
+    /**
+     * Creates a panel with two buttons: one to restart the game and another to quit
+     * the application.
+     *
+     * @return a {@code JPanel} containing the play again and quit buttons
+     */
     private JPanel createButtonsPanel(){
         JPanel buttonsPanel = new JPanel();
         JButton playAgain = new JButton("Play Again");
@@ -61,14 +84,26 @@ public class Victory {
         return buttonsPanel;
     }
 
+    /**
+     * Disposes of the victory frame when the user attempts to close the window manually.
+     *
+     * @param event the {@code WindowEvent} triggered by the close request
+     */
     private void shutdown(WindowEvent event) {
         event.getWindow().dispose();
     }
 
+    /**
+     * Exits the entire application immediately when the user clicks the "Quit" button.
+     */
     private void shutdownFull() {
         System.exit(0);
     }
 
+    /**
+     * Restarts the Sudoku game by closing both the current victory window and the
+     * existing game frame. A new puzzle model and frame are created to start fresh.
+     */
     private void restartGame() {
         gameFrame.dispose();
         frame.dispose();
