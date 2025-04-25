@@ -12,8 +12,4 @@ public class AppFonts {
         return new Font("Dialog", Font.BOLD, 24);
     }
 
-    public static Font getFooterFont() {
-        return new Font("Dialog", Font.PLAIN, 12);
-    }
-
 }

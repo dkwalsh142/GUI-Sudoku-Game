@@ -30,15 +30,14 @@ public class SudokuGridPanel extends JPanel {
         this.topMargin = 20;
         this.letterWidth = 64;
 
-        int wordWidth = (letterWidth) * 9;
-        this.leftMargin = (width - wordWidth) / 2;
+        this.leftMargin = 20;
         int height = (letterWidth) * 9 + 2 * topMargin;
         this.setPreferredSize(new Dimension(width, height));
 
         this.grid = calculateRectangles();
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 Point clickPoint = e.getPoint();
                 handleCellClick(clickPoint);
             }
@@ -106,12 +105,18 @@ public class SudokuGridPanel extends JPanel {
 
 
         int[][] sudokuGrid = model.getCurrent();
+        int[][] startGrid = model.getSetup();
 
         for (int row = 0; row < grid.length; row++) {
             for (int column = 0; column < grid[row].length; column++) {
                 Rectangle r = grid[row][column];
-                int sudokuResponse = sudokuGrid[row][column];
                 drawOutline(g2d, r);
+                if (startGrid[row][column] != 0){
+                    fillCell(g2d, r, Color.LIGHT_GRAY);
+                }
+                if (row == getSelectedRow() && column == getSelectedCol()){
+                    fillCell(g2d, r, Color.YELLOW);
+                }
             }
         }
         sendNumbers(g2d, model, grid);
@@ -128,6 +133,16 @@ public class SudokuGridPanel extends JPanel {
         g2d.drawLine(x, y + height, x + width, y + height);
         g2d.drawLine(x, y, x, y + height);
         g2d.drawLine(x + width, y, x + width, y + height);
+    }
+
+    private void fillCell(Graphics2D g2d, Rectangle r, Color color){
+        int x = r.x + 1;
+        int y = r.y + 1;
+        int width = r.width - 2;
+        int height = r.height - 2;
+
+        g2d.setColor(color);
+        g2d.fillRect(x, y, width, height);
     }
 
     public void updateGrid(){

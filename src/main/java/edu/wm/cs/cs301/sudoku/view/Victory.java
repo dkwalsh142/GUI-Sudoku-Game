@@ -33,7 +33,7 @@ public class Victory {
 
         frame.pack();
         frame.setMinimumSize(frame.getPreferredSize());
-        frame.setLocationByPlatform(true);
+        frame.setLocation(380, 240);
         frame.setVisible(true);
 
         return frame;

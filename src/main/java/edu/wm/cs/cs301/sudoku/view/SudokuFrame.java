@@ -24,7 +24,7 @@ public class SudokuFrame {
 
     public SudokuFrame(SudokuPuzzle model) {
         this.model = model;
-        this.width = 800;
+        this.width = 650;
         this.sudokuGridPanel = new SudokuGridPanel(this, model, width);
         this.frame = createAndShowGUI();
 
@@ -48,7 +48,7 @@ public class SudokuFrame {
 
         frame.pack();
         frame.setMinimumSize(frame.getPreferredSize());
-        frame.setLocation(300, 150);
+        frame.setLocation(250, 100);
         frame.setVisible(true);
 
         System.out.println("Frame size: " + frame.getSize());
@@ -81,7 +81,7 @@ public class SudokuFrame {
             numberGridPanel.add(button);
         }
 
-        numberGridPanel.setBorder(BorderFactory.createEmptyBorder(200, 0, 200, 20));
+        numberGridPanel.setBorder(BorderFactory.createEmptyBorder(210, 0, 210, 20));
 
         return numberGridPanel;
     }

@@ -34,6 +34,10 @@ public class SudokuPuzzle {
         return(current);
     }
 
+    public int[][] getSetup(){
+        return(setup);
+    }
+
     public int[][] getSolution() {
         return solution;
     }
@@ -86,7 +90,7 @@ public class SudokuPuzzle {
 
     public int[][] removeValues (int[][] grid){
         int[][] tempGrid = grid;
-        int attempts = 1;
+        int attempts = 30;
         for (int num = 1; num <= attempts; num++) {
             int row = (int) (Math.random() * 9);
             int col = (int) (Math.random() * 9);

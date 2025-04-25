@@ -46,7 +46,7 @@ public class InstructionsFrame {
 
         frame.pack();
         frame.setMinimumSize(frame.getPreferredSize());
-        frame.setLocationByPlatform(true);
+        frame.setLocation(380, 240);
         frame.setVisible(true);
 
         System.out.println("Frame size: " + frame.getSize());
